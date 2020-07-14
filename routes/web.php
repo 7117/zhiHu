@@ -14,3 +14,34 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/test', function () {
+    return "基本路由";
+}
+);
+
+//必选参数
+Route::get('/testp/{id}', function ($id) {
+    return "基本路由".$id;
+}
+);
+
+//可选参数
+Route::get('/testop/{id?}', function ($id=0) {
+    return "基本路由?".$id;
+}
+);
+
+// 正则约束
+Route::get('/testrule/{id}', function ($id) {
+    return "正则?".$id;
+})->where('id','\d+');
+
+// 多参数
+Route::get('/testrule/{name}/{age}', function ($name,$age) {
+    return "多参数".$name.$age;
+})->where(['name'=>'\w+','age'=>'\d+']);
+
+// 路由的控制器方法
+Route::get('/test/fn','TestController@lst');
+Route::get('/user/lst','Test\UserController@lst');
