@@ -15,5 +15,12 @@
     {{$v['name']}}-----{{$v['age']}}
     <br>
 @endforeach
+
+<hr>
+
+<?php foreach($data as $k=>$v): ?>
+    <?php echo $v['name'];?>----<?php echo $v['age'];?>
+        <br>
+<?php endforeach;?>
 </body>
 </html>
