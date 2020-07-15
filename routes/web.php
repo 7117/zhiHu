@@ -147,7 +147,6 @@ Route::get('/orm/lst', 'ORM\UserController@lst');
 // 添加的路由
 Route::match(['get', 'post'], '/orm/add', 'ORM\UserController@add');
 // 修改的路由
-Route::match(['get', 'post'], '/orm/edit/{id}', 'ORM\UserController@edit')
-    ->where('id', '\d+');
+Route::match(['get', 'post'], '/orm/edit/{id}', 'ORM\UserController@edit');
 //删除的路由
 Route::get('/orm/del/{id}', 'ORM\UserController@del')->where('id', '\d+');

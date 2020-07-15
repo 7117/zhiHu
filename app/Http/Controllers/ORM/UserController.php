@@ -34,7 +34,13 @@ class UserController extends Controller
             $info = UserModel::find($id);
             return view('orm.edit',['info'=>$info]);
         }elseif ($request->isMethod('post')){
+            $info = UserModel::find($id);
+            $info->name = $request->input('name');
+            $info->password = $request->input('password');
 
+            $info->save();
+
+            return redirect('/orm/lst');
         }
     }
 

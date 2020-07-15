@@ -6,10 +6,10 @@
 </head>
 <body>
 
-<form action="/user/edit/4" method="post">
+<form action="/orm/edit/1" method="post">
     {{csrf_field()}}
-    用户名：<input type="text" name="name" value="22">
-    密码：<input type="text" name="password" value="33">
+    用户名：<input type="text" name="name" value="{{$info->name}}">
+    密码：<input type="text" name="password" value="{{$info->password}}">
     <input type="submit" name="btn" value="提交">
 </form>
 
