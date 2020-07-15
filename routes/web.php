@@ -11,6 +11,7 @@
 |
 */
 
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -57,3 +58,83 @@ Route::get('/login', function () {
 Route::get('/setting', function () {
     return "这里是middleware的login登录页面处理成功的uid" . session('uid');
 })->middleware('login');
+
+//
+// Route::get('/user/add', 'Test\UserController@add');
+// Route::post('/user/add', 'Test\UserController@add');
+
+Route::match(['get', 'post'], '/user/add', 'Test\UserController@add');
+
+//设置响应
+Route::get('/response',function(){
+    return response('hello world',200)->header('content-type','text/html;charset-utf-8');
+});
+
+// 设置cookie
+Route::get('/response/cookie',function(){
+    echo "success";
+    return response('')->withCookie('name','xiaoming',10);
+});
+
+Route::get('/cookie',function(){
+    dd(Cookie::get('name'));
+});
+
+//ajax  json
+Route::get('/ajax',function(){
+    return view('ajax');
+});
+Route::get('/response/ajax',function(){
+    return response()->json(['name'=>'xiao','age'=>'222']);
+});
+
+Route::get('/db/insert',function(){
+    $rs = DB::insert("insert into it_user values (null,'xiaoming','111111')");
+    dd($rs);
+});
+
+Route::get('/db/select',function(){
+    $rs = DB::select("select * from it_user");
+    dd($rs);
+});
+
+Route::get('/db/update',function(){
+    $rs = DB::update("update it_user set name='xiaomeiaa' where id=1 ");
+    dd($rs);
+});
+
+Route::get('/db/selectp',function(){
+    $rs = DB::select("select * from it_user where id=:id",['id'=>2]);
+    dd($rs);
+});
+
+
+Route::get('/db/delete',function(){
+    $rs = DB::delete("delete from it_user where id=:id",['id'=>2]);
+    dd($rs);
+});
+
+Route::get('/db/get',function(){
+    $rs = DB::table('user')->get();
+    dd($rs);
+});
+
+Route::get('/db/get',function(){
+    $rs = DB::table('user')->pluck('id');
+    dd($rs);
+});
+
+Route::get('/db/get',function(){
+    $rs = DB::table('user')->where('id','=',1)->get();
+    dd($rs);
+});
+
+Route::get('/db/insert',function(){
+    $rs = DB::table('user')->insert(['name'=>'www','password'=>'222']);
+    dd($rs);
+});
+
+Route::get('/db/delete',function(){
+    $rs = DB::table('user')->where('id','>','3')->delete();
+    dd($rs);
+});
